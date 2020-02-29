@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html><meta charset="utf-8"><meta name="generator" content="Hugo 0.62.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet"><title>Lets Build a Mechanical Keyboard&nbsp;&ndash;&nbsp;Keep It Simple Stupid</title><link rel="stylesheet" href="/css/style.css" integrity="">
+<body>
+    <div class="base-body max-width"><section id="header" class="site header max-body-width">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/"><span class="site name">Keep It Simple Stupid</span></a></span>
+        <span class="header right-side"></span></div></section><div id="content" class="max-body-width"><section class="article header">
+    <h1 class="article title">Lets Build a Mechanical Keyboard</h1><p class="article date">February 29, 2020</p></section>
+<article class="article markdown-body"><p>I've been pretty interested in mechanical keyboards lately.  Building one has been on my bucket
+list for awhile now so last weekend I decided to check out <a href="https://yushakobo.jp/"target="_blank">Yusha Kobo</a>
+, a
+specialty keyboard store based in Tokyo which sells kits.</p>
+<p>I purchased my first build kit the
+<a href="https://eucalyn.shop/shop/kits/mint60-starter"target="_blank">Mint60</a>
+ which a split keyboard. The 60 standing for the 60%
+keyboard layout which is a popular form factor for hobby keyboards.</p>
+<p>My Mint60 build kit comes with the following:</p>
+<ul>
+<li>A transparent keyboard casing</li>
+<li>Screws (spacer x20, 5mm x 28, 8mm x 12)</li>
+<li>CherryPCB Stablisers x5</li>
+<li>ProMicro Arduino x2</li>
+<li>TRRS Audio Jack x2</li>
+<li>RGB LED Strip</li>
+<li>Reset Switch x2</li>
+<li>And a lot of resistors</li>
+</ul>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-kit.png"><img  src="/mech-keyboard/mech-kit.png"
+        alt/></a>
+<em>(Image credit Yusha Kobo)</em></p>
+<p>Note, build kits sold at Yusha Kobo (and most online stores) <strong>don't include key
+switches or key caps</strong>. These have to be purchased seperately with your kit. The
+Mint60 has 66 keys so I needed to purchase 66 switches and the key caps
+seperately.</p>
+<h3 id="what-do-i-need-to-put-a-kit-together">What do I need to put a kit together?</h3>
+<ul>
+<li>A keyboard starter kit (includes a pcb, mirocontroller, keyboard stablizers,
+case, etc.)</li>
+<li>Your own keyboard switches and caps (If not included in your kit)</li>
+<li>Soldering gear (solder, soldering iron, copper wick)</li>
+<li>A pair for small wire cutters</li>
+<li>A multi-meter for debugging (optional)</li>
+<li>A lot of patience</li>
+</ul>
+<p>Note, you probably won't need a multi-meter but it may help if you made
+mistakes soldering. I ended up using a multi-meter to test my switches and some
+components for <a href="https://www.youtube.com/watch?v=OOK8np4t40c"target="_blank">continuity</a>
+.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/what-do-i-need.png"><img  src="/mech-keyboard/what-do-i-need.png"
+        alt/></a></p>
+<h3 id="key-switches">Key switches</h3>
+<p>One of the most rewarding parts of building your own keyboard is selecting your
+own key switches. Here's a great <a href="https://www.youtube.com/watch?v=CbPCqVsX-wQ"target="_blank">YouTube
+video</a>
+ for finding the right switch
+for you.</p>
+<p>In the end I chose Cherry MX red switches (80 for around 3000 JPY) at
+Yusha Kobo. These are soft to press and don't make much noise.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-switch.png"><img  src="/mech-keyboard/mech-keyboard-switch.png"
+        alt/></a></p>
+<h3 id="keyboard-caps">Keyboard caps</h3>
+<p>For this build I chose <a href="https://yushakobo.jp/shop/tai-hao-pbt-hawaii/"target="_blank">Tai-Hao PBT
+Hawaii</a>
+ keycap set which I bought
+at Yusha Kobo.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-hawaii.jpg"><img  src="/mech-keyboard/mech-hawaii.jpg"
+        alt/></a>
+<em>(Image credit Yusha Kobo)</em></p>
+<h3 id="before-you-get-started">Before you get started</h3>
+<p>* <strong>Solder your microcontroller LAST!</strong> *</p>
+<p>If you're stupid like me you might solder your microcontroller on before your
+key switches. Don't be stupid like me.</p>
+<p>Once you solder on the microcontroller <strong>you can no longer solder any key
+switches above it</strong>.  This may not be true for most kits but this was the case
+for the Mint60 kit I bought 🤦</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-mistake01.png"><img  src="/mech-keyboard/mech-keyboard-mistake01.png"
+        alt/></a></p>
+<p>* <strong>Make sure your switches are soldered in completely</strong> *</p>
+<p>When I put everything together and plugged the keyboard in I noticed some keys
+didn't work. Taking a closer look you can see a small gap in the pin hole which
+holds the key switch.</p>
+<p>When soldering you should always make sure to cover pin holes completely
+in solder otherwise they can spring loose which is what happened here.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-mistake02.png"><img  src="/mech-keyboard/mech-keyboard-mistake02.png"
+        alt/></a></p>
+<p>When soldering you want to make sure you cover each pin hole completely in
+solder and have a nice cone shape like the pin on the right in the above photo.</p>
+<h3 id="getting-started">Getting started</h3>
+<p>The first thing is soldering in <strong>resistors</strong>.  If your PCB does not have these
+soldered in already you will have to manually do this. Resistors are needed to
+prevent voltage from fluctuating and randomly triggering key
+presses. More on why resitors are needed <a href="https://www.arduino.cc/en/tutorial/button"target="_blank">here</a>
+.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-resistor2.png"><img  src="/mech-keyboard/mech-keyboard-resistor2.png"
+        alt/></a></p>
+<p>I pain-stakingly bent each individual resistor to fit it into the board.
+A quick trick that will save you time is to find a book or edge and bend all the
+resistors at the same time. This will ensure you can quickly slide all the
+resisters into the pin holes on your board.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-resistor3.png"><img  src="/mech-keyboard/mech-keyboard-resistor3.png"
+        alt/></a>
+<a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-resistor.png"><img  src="/mech-keyboard/mech-keyboard-resistor.png"
+        alt/></a></p>
+<p>Once you slide in the resistors into the board, bend the bottoms so they don't fall
+out</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-resistor4.png"><img  src="/mech-keyboard/mech-keyboard-resistor4.png"
+        alt/></a></p>
+<p>Afterwards solder the pin hole down and cut off the excess legging with wire
+cutters</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-resistor5.png"><img  src="/mech-keyboard/mech-keyboard-resistor5.png"
+        alt/></a></p>
+<h3 id="soldering-on-the-key-switches">Soldering on the key switches</h3>
+<p>Your kit should come with a plate where you can start mounting your switches to
+your board.</p>
+<p><strong>Be careful at this step</strong>. Once you've decided on a layout you won't be able
+to easily de-solder the key switches again. It's possible, but will suck.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-solder-switch.png"><img  src="/mech-keyboard/mech-keyboard-solder-switch.png"
+        alt/></a></p>
+<p><em>Note, the black areas surrounding the larger keys are called <a href="https://deskthority.net/wiki/Stabiliser"target="_blank">stablisers</a>
+. These ensure longer keys
+like spacebar or backspace don't fly off when pressed on the side. These
+are held in place through small holes in the PCB. At least, this was the case on
+my board.</em></p>
+<p>Once you have decided on your choice of layout and swtiches you can start
+soldering the key switches onto the board. Also make sure the small white circle
+on the back of your key switch is flush against the backside of the PCB. I
+recommend using small clamps to hold the board in place before soldering.</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-switch2.png"><img  src="/mech-keyboard/mech-keyboard-switch2.png"
+        alt/></a></p>
+<h3 id="flash-your-microcontroller">Flash your microcontroller</h3>
+<p>Your kit should come with a microcontroller. The most popular microcontroller for keyboards
+looks like the <a href="https://www.sparkfun.com/products/12640"target="_blank">Arduino Pro Micro</a>
+.</p>
+<p>I went a bit crazy when I built my first kit. I had soldered
+everything onto the board and plugged it in. Nothing. Keys were not registered.
+No LED lights. This is because <strong>most kits dont flash the microcontroller</strong>. You will need to flash the
+firmware onto the microcontroller otherwise nothing will work.</p>
+<p>I used <a href="https://qmk.fm/"target="_blank">QMK</a>
+ for flashing my microcontroller. This is a free open source
+project for hardware keyboards. Flashing the microcontroller is easy using QMK. You just
+plug it into USB and run the QMK software and select your keyboard model.
+Most hobby boards have their software already included in the <a href="https://github.com/qmk/qmk_firmware"target="_blank">QMK
+repository</a>
+ so flashing is easy.</p>
+<h3 id="soldering-on-the-remaining-components">Soldering on the remaining components</h3>
+<p>After you made sure your microcontroller can be flashed its time to solder the
+rest of the components down. For me, this meant the TRRS audio jack for my split
+keyboard, a microcontroller, and a small RGB LED strip</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-arduino.JPG"><img  src="/mech-keyboard/mech-keyboard-arduino.JPG"
+        alt/></a>
+<a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-led.JPG"><img  src="/mech-keyboard/mech-led.JPG"
+        alt/></a>
+(image credit to
+<a href="http://eucalyn.hatenadiary.jp/entry/how-to-build-mint60"target="_blank">eucalyn's</a>
+ Mint60 guide)</p>
+<h3 id="make-sure-your-key-switches-work">Make sure your key switches work</h3>
+<p>Once your microcontroller has been flashed and soldered you can start testing each key
+switch. This is good idea before closing the keyboard up. If one key does not respond
+it may need to be resoldered. I had several switches which needed to be resoldered on
+my first build because I didn't use enough solder.</p>
+<p>After that you need some software for testing. If you are on OSX I recommend using <a href="https://pqrs.org/osx/karabiner/"target="_blank">Karabiner
+EventViewer</a>
+. Once installed you can check each
+individual key and make sure it maps to the correct key. A word of warning though the &ldquo;fn&rdquo;
+key will not register unless you press it in combination with another key.</p>
+<h3 id="put-on-your-key-caps">Put on your key caps!</h3>
+<p>Almost there! Once you've verified your board works you can start putting the
+key caps on it!</p>
+<p><a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-caps.png"><img  src="/mech-keyboard/mech-caps.png"
+        alt/></a>
+<a  target="_blank" rel="noopener noreferrer" 
+  href="/mech-keyboard/mech-keyboard-keycap.png"><img  src="/mech-keyboard/mech-keyboard-keycap.png"
+        alt/></a></p>
+<h3 id="customization-keymaps">Customization keymaps</h3>
+<p>After you get your board setup you will want to start customizing the layout a
+bit. This is pretty simple once you can get QMK compiling locally. After you can
+compile the project you can simply modify the keymap inside QMK. I ended up modifying my <a href="https://github.com/qmk/qmk_firmware/blob/master/keyboards/mint60/keymaps/default/keymap.c"target="_blank">original keymap</a>
+
+with my own mappings.</p>
+<p>I would defintely recommend reading the noob guide to QMK before jumping in to
+get an idea of the full set of features:
+<a href="https://beta.docs.qmk.fm/newbs/newbs_getting_started"target="_blank">https://beta.docs.qmk.fm/newbs/newbs_getting_started</a>
+</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>It turns out building a mechanical keyboard is actually not that difficult.
+I had a difficult time because I didn't read my kits instructions and I
+paid for it with hours of de-soldering&hellip;</p>
+<p>In the end, a keyboard is just a bunch of switches. The circuit is quite simple
+and easy to understand. It's essentially a bunch of <a href="https://www.arduino.cc/en/tutorial/button"target="_blank">arduino
+buttons</a>
+ rigged together if
+you've every done anything with the Arduino it should be quite simple.</p>
+<p>Eventually I want to design my own PCB layout. However, for the time
+being I'm quite happy with form factors most hobby kits offer :)</p>
+</article><section class="article navigation"><p><a class="link" href="/posts/welcome-to-my-blog/"><span class="li"></span>Goal Setting for 2020</a class="link">
+    </p></section></div><section id="footer" class="footer max-body-width"></section></div>
+</body>
+
+</html>

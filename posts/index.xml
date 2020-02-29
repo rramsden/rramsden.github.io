@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Keep It Simple Stupid</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Jan 2020 23:25:17 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 29 Feb 2020 17:42:44 +0900</lastBuildDate>
     
 	<atom:link href="https://rramsden.ca/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lets Build a Mechanical Keyboard</title>
+      <link>https://rramsden.ca/posts/lets-build-a-keyboard/</link>
+      <pubDate>Sat, 29 Feb 2020 17:42:44 +0900</pubDate>
+      
+      <guid>https://rramsden.ca/posts/lets-build-a-keyboard/</guid>
+      <description>I&#39;ve been pretty interested in mechanical keyboards lately. Building one has been on my bucket list for awhile now so last weekend I decided to check out Yusha Kobo , a specialty keyboard store based in Tokyo which sells kits.
+I purchased my first build kit the Mint60 which a split keyboard. The 60 standing for the 60% keyboard layout which is a popular form factor for hobby keyboards.
+My Mint60 build kit comes with the following:</description>
+    </item>
     
     <item>
       <title>Goal Setting for 2020</title>
