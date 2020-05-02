@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Keep It Simple Stupid</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 29 Feb 2020 17:42:44 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 22:18:00 +0900</lastBuildDate>
     
 	<atom:link href="https://rramsden.ca/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Advice for the new CTO</title>
+      <link>https://rramsden.ca/posts/advice-for-the-new-cto/</link>
+      <pubDate>Sat, 02 May 2020 22:18:00 +0900</pubDate>
+      
+      <guid>https://rramsden.ca/posts/advice-for-the-new-cto/</guid>
+      <description>Being a CTO at a small startup with 2-3 people was exciting. Titles didn&amp;rsquo;t matter, they had no weight except when pitching to investors. All that mattered back then was how fast you could put together a working prototype together.
+When I was promoted to CTO at a much larger company that&amp;rsquo;s when I struggled. One of the biggest challenges was actually the title itself. In my case, I went from being a productive engineer to worrying about how others viewed me at the company and if I was living up to expectations.</description>
+    </item>
     
     <item>
       <title>Lets Build a Mechanical Keyboard</title>
@@ -17,7 +27,7 @@
       <pubDate>Sat, 29 Feb 2020 17:42:44 +0900</pubDate>
       
       <guid>https://rramsden.ca/posts/lets-build-a-keyboard/</guid>
-      <description>I&#39;ve been pretty interested in mechanical keyboards lately. Building one has been on my bucket list for awhile now so last weekend I decided to check out Yusha Kobo , a specialty keyboard store based in Tokyo which sells kits.
+      <description>I&amp;rsquo;ve been pretty interested in mechanical keyboards lately. Building one has been on my bucket list for awhile now so last weekend I decided to check out Yusha Kobo , a specialty keyboard store based in Tokyo which sells kits.
 I purchased my first build kit the Mint60 which a split keyboard. The 60 standing for the 60% keyboard layout which is a popular form factor for hobby keyboards.
 My Mint60 build kit comes with the following:</description>
     </item>
@@ -28,8 +38,8 @@ My Mint60 build kit comes with the following:</description>
       <pubDate>Sat, 04 Jan 2020 23:25:17 +0900</pubDate>
       
       <guid>https://rramsden.ca/posts/welcome-to-my-blog/</guid>
-      <description>In 2013, I left Canada for a new life in Japan. I brought a laptop and a couple of pairs of clothes with me. I didn&#39;t speak the language and had no job lined up. Because I had saved up some money, gotten my bachelor&#39;s degree, and had the right work experience I was able to find a job.
-It wasn&#39;t a spontaneous decision to move to Japan. I loved Japan and had been planning most of my early 20&#39;s on how to move there.</description>
+      <description>In 2013, I left Canada for a new life in Japan. I brought a laptop and a couple of pairs of clothes with me. I didn&amp;rsquo;t speak the language and had no job lined up. Because I had saved up some money, gotten my bachelor&amp;rsquo;s degree, and had the right work experience I was able to find a job.
+It wasn&amp;rsquo;t a spontaneous decision to move to Japan. I loved Japan and had been planning most of my early 20&amp;rsquo;s on how to move there.</description>
     </item>
     
   </channel>
