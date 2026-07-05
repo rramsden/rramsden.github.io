@@ -105,7 +105,11 @@ async function main() {
 
 ## Prompting the LLM model
 
-First step is initializing OpenAI wrapper so we can communicate with LLM Studio. You will need to enable the “Developer Server” and in “Server Settings” listen on your local network. It should then give you an IP address to make requests. Copy and paste this into the OpenAI wrapper as follows (note, you may not need a valid apiKey if password protection is disabled):
+The first step to prompting a real LLM is to initialize an OpenAI wrapper so we can communicate with LMStudio. LMStudio supports OpenAI's API under the hood and allows us to route to local models using it.
+
+You will need to enable the “Developer Server” and in “Server Settings” and listen on your local network. It should then give you an IP address to make requests.
+
+Once you have the IP address the server is binded on you can copy and paste this into the OpenAI wrapper as follows (note, a dummy password should be okay if password protection is disabled):
 
 ```typescript
 const client = new OpenAI({
@@ -114,7 +118,7 @@ const client = new OpenAI({
 });
 ```
 
-Next let’s replace the mocked call out example above with an OpenAI completion request
+Next let’s replace the mocked call out example above with an OpenAI completion request:
 
 ```typescript
 // Call our model and push the response to messages
@@ -127,7 +131,7 @@ messages.push(reply);
 
 ```
 
-We should now be able to have a conversation with our agent
+We should now be able to have a conversation with our agent now :)
 
 ```
 You> Hello
@@ -150,7 +154,7 @@ For the most accurate and up-to-date information, I recommend checking a reliabl
 
 In the example above our LLM doesn’t have the ability to call tools so when its asked for real-time data it doesn’t work.
 
-Will expand our program to include a `tools.ts` file which will contain the tool calls
+Will expand our program to include a `tools.ts` file which will contain define our tool available to our agent:
 
 ```typescript
 // tools.ts
@@ -178,7 +182,7 @@ export const metadata = [
 
 ```
 
-Next in `main.ts` import the tools and pass them to completions
+Next in `main.ts` import the tools and pass them into the completions API call:
 
 ```typescript
 import { metadata } from "./tools"
@@ -190,7 +194,7 @@ const completion = await client.chat.completions.create({
 });
 ```
 
-As an experiment we can now ask our model if it has access to any tools
+As an experiment we can now ask our model if it has access to any tools:
 
 ```
 You> What tools do you have access to?
@@ -199,7 +203,7 @@ Assistant>
 I have access to a weather tool that allows me to fetch current weather information for any location. You can simply provide a city name (e.g., "New York") or specify a location with country/region details (e.g., "London, UK" or "Sydney, Australia"). Would you like me to check the weather for a specific place?
 ```
 
-Of course if you ask the agent for the weather in a City it will return blank since there is no tool defined yet. Let’s define `get_weather`
+At this point if you ask for the weather in a specific city it will return nothing as we have not defined the function yet. Let’s define `get_weather`:
 
 ```typescript
 // tools.ts
@@ -229,7 +233,9 @@ export async function get_weather(location: string): Promise<string> {
 }
 ```
 
-Once defined you will need to handle the reply from the LLM to call tools. You can do this by checking the reply from the first completion and looping through `tool_calls` array in the reply:
+Once defined you will need to handle the first response from our LLM model which will ask to invoke tooling.
+
+You can do this by checking the reply from the first completion and looping through `tool_calls` array in the reply:
 
 ```typescript
 // Call our model with our user input
@@ -313,4 +319,5 @@ Here is the weather information for Shikinejima, Japan:
 ☁️ cloud coverage 25%
 ```
 
-Perfect. That’s it for the first tutorial. We now have an agent that will tell us the weather to any location.
+Perfect. That’s it for the first tutorial. We now have an agent that will tell us the weather to any location
+in a fixed format. If you can imagine we can create much more complex agents. Once they have the ability to call tools we can do some pretty complicated stuff!
