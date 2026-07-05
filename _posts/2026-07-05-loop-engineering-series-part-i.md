@@ -27,9 +27,9 @@ npx tsc --init
 
 After installing the dependencies copy and paste the following into `package.json` 
 
-```bash
+```json
 {
-	"type": "module",
+  "type": "module",
   "scripts": {
     "dev": "npx tsx main.ts"
   },
@@ -65,7 +65,7 @@ An agentic loop contains the following:
 
 Here is an example of the most simple agentic loop (minus tool calling):
 
-```tsx
+```typescript
 import { createInterface } from "node:readline/promises"
 import { stdin as input, stdout as output } from "node:process";
 
@@ -75,31 +75,31 @@ const MODEL = 'qwen/qwen3-4b';
 const messages = [{ role: "system", content: SYSTEM_PROMPT }];
 
 async function main() {
-	const rl = createInterface({ input, output });
-	
-	// Gracefully handle CTRL+C on CLI
-	rl.on("SIGINT", async () => {
-		rl.close();
-		process.exit(0);
-	})
-	
-	// The agentic loop
-	while (true) {
-	  let user_input = await rl.question("You> ");
-	  user_input = user_input.trim(); // Strip any whitespace
-	  
-	  // Check if user has typed "exit"
-	  if (user_input == "quit") break;
-	  
-	  // Push the users question onto our context
-	  messages.push({ role: "user", content: user_input });
-	  
-	  // Mock out an LLM response from the user input
-	  let mocked_response = { role: "assistant", content: "Hello!" };
-	  messages.push(mocked_response);
-	  
-	  console.log(`Assistant> ${mocked_response.content}\n\n`);
-	}
+  const rl = createInterface({ input, output });
+  
+  // Gracefully handle CTRL+C on CLI
+  rl.on("SIGINT", async () => {
+    rl.close();
+    process.exit(0);
+  })
+  
+  // The agentic loop
+  while (true) {
+    let user_input = await rl.question("You> ");
+    user_input = user_input.trim(); // Strip any whitespace
+    
+    // Check if user has typed "exit"
+    if (user_input == "quit") break;
+    
+    // Push the users question onto our context
+    messages.push({ role: "user", content: user_input });
+    
+    // Mock out an LLM response from the user input
+    let mocked_response = { role: "assistant", content: "Hello!" };
+    messages.push(mocked_response);
+    
+    console.log(`Assistant> ${mocked_response.content}\n\n`);
+  }
 }
 ```
 
@@ -107,16 +107,16 @@ async function main() {
 
 First step is initializing OpenAI wrapper so we can communicate with LLM Studio. You will need to enable the “Developer Server” and in “Server Settings” listen on your local network. It should then give you an IP address to make requests. Copy and paste this into the OpenAI wrapper as follows (note, you may not need a valid apiKey if password protection is disabled):
 
-```jsx
+```typescript
 const client = new OpenAI({
-	baseURL: "http://100.121.13.119:1234/v1",
-	apiKey: 'dummy_value'
+  baseURL: "http://100.121.13.119:1234/v1",
+  apiKey: 'dummy_value'
 });
 ```
 
 Next let’s replace the mocked call out example above with an OpenAI completion request
 
-```tsx
+```typescript
 // Call our model and push the response to messages
 const completion = await client.chat.completions.create({
   model: MODEL,
@@ -152,35 +152,35 @@ In the example above our LLM doesn’t have the ability to call tools so when it
 
 Will expand our program to include a `tools.ts` file which will contain the tool calls
 
-```jsx
+```typescript
 // tools.ts
 export const metadata = [
-	{
-		type: "function",
-		function: {
-			name: "get_weather",
-			description:
-				"Fetch current weather for a location. You may pass just a city name (e.g. 'Tokyo'), or add a country/region qualifier after a comma to disambiguate (e.g. 'San Francisco, US' or 'Portland, Oregon').",
-			parameters: {
-				type: "object",
-				required: ["location"],
-				properties: {
-					location: {
-						type: "string",
-						description:
-							'City name, optionally with a country/region after a comma, e.g. "Tokyo", "San Francisco, US", or "Portland, Oregon".',
-					}
-				}
-			}
-		}
-	}
+  {
+    type: "function",
+    function: {
+      name: "get_weather",
+      description:
+        "Fetch current weather for a location. You may pass just a city name (e.g. 'Tokyo'), or add a country/region qualifier after a comma to disambiguate (e.g. 'San Francisco, US' or 'Portland, Oregon').",
+      parameters: {
+        type: "object",
+        required: ["location"],
+        properties: {
+          location: {
+            type: "string",
+            description:
+              'City name, optionally with a country/region after a comma, e.g. "Tokyo", "San Francisco, US", or "Portland, Oregon".',
+          }
+        }
+      }
+    }
+  }
 ];
 
 ```
 
 Next in `main.ts` import the tools and pass them to completions
 
-```jsx
+```typescript
 import { metadata } from "./tools"
 
 const completion = await client.chat.completions.create({
@@ -201,37 +201,37 @@ I have access to a weather tool that allows me to fetch current weather informat
 
 Of course if you ask the agent for the weather in a City it will return blank since there is no tool defined yet. Let’s define `get_weather`
 
-```tsx
+```typescript
 // tools.ts
 export async function get_weather(location: string): Promise<string> {
-	try {
-		// Native fetch with an 8-second timeout inline
-		const res = await fetch(`https://wttr.in/${encodeURIComponent(location)}?format=j1`, {
-			signal: AbortSignal.timeout(8000)
-		});
-		
-		if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
-		const wx = await res.json();
-		
-		const current = wx.current_condition?.[0];
-		const area = wx.nearest_area?.[0];
-		if (!current || !area) return `Weather data unavailable for ${location}.`;
+  try {
+    // Native fetch with an 8-second timeout inline
+    const res = await fetch(`https://wttr.in/${encodeURIComponent(location)}?format=j1`, {
+      signal: AbortSignal.timeout(8000)
+    });
+    
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
+    const wx = await res.json();
+    
+    const current = wx.current_condition?.[0];
+    const area = wx.nearest_area?.[0];
+    if (!current || !area) return `Weather data unavailable for ${location}.`;
 
-		const name = area.areaName?.[0]?.value || location;
-		const country = area.country?.[0]?.value || "";
-		const { temp_C: temp, windspeedKmph: wind, cloudcover: clouds } = current;
-		const condition = current.weatherDesc?.[0]?.value || "Unknown";
+    const name = area.areaName?.[0]?.value || location;
+    const country = area.country?.[0]?.value || "";
+    const { temp_C: temp, windspeedKmph: wind, cloudcover: clouds } = current;
+    const condition = current.weatherDesc?.[0]?.value || "Unknown";
 
-		return `${name}${country ? `, ${country}` : ""}: ${temp}°C, wind ${wind} km/h, cloud coverage: ${clouds}% (${condition})`;
-	} catch (err) {
-		return `Sorry, I couldn't fetch the weather for "${location}" right now (${err instanceof Error ? err.message : err}). Please try again shortly.`;
-	}
+    return `${name}${country ? `, ${country}` : ""}: ${temp}°C, wind ${wind} km/h, cloud coverage: ${clouds}% (${condition})`;
+  } catch (err) {
+    return `Sorry, I couldn't fetch the weather for "${location}" right now (${err instanceof Error ? err.message : err}). Please try again shortly.`;
+  }
 }
 ```
 
 Once defined you will need to handle the reply from the LLM to call tools. You can do this by checking the reply from the first completion and looping through `tool_calls` array in the reply:
 
-```tsx
+```typescript
 // Call our model with our user input
 const completion = await client.chat.completions.create({
   model: MODEL,
@@ -247,7 +247,7 @@ if (reply.tool_calls && reply.tool_calls.length > 0) {
       const args = JSON.parse(toolCall.function.arguments)
       const toolResult = get_weather(args.location);
       
-	    messages.push({
+      messages.push({
         role: "tool",
         tool_call_id: toolCall.id,
         content: toolResult
@@ -281,7 +281,7 @@ If we don’t fix the format of our agent it will always come up with some uniqu
 
 We can fix this with a slight system prompt update
 
-```jsx
+```typescript
 const SYSTEM_PROMPT = `
 You are a weather assistant.
 
