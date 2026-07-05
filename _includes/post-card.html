@@ -1,0 +1,8 @@
+{% comment %} Renders a single post entry in a list. Expects `include.post`. {% endcomment %}
+<article class="post-card">
+  <h3 class="entry-title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h3>
+  <p class="entry-meta">
+    <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%B %-d, %Y" }}</time>
+  </p>
+  <p class="entry-excerpt">{{ include.post.excerpt | strip_html | truncatewords: 34 }}</p>
+</article>

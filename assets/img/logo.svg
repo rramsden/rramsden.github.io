@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 64" role="img" aria-label="KISS — Keep It Simple Stupid">
+  <style>
+    .ink   { fill: #3a3832; }
+    .brand { fill: #6a3a2a; }
+    .rule  { stroke: #d2d0c8; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #3a3832; }
+    }
+    text {
+      font-family: "Iowan Old Style","Charter","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    }
+  </style>
+
+  <!-- Monogram mark: a simple, bold serif K in a circle -->
+  <circle cx="32" cy="32" r="27" fill="none" class="rule" stroke-width="2"/>
+  <text x="32" y="32" text-anchor="middle" dominant-baseline="central"
+        font-size="34" font-weight="700" class="brand">K</text>
+
+  <!-- Wordmark -->
+  <text x="74" y="27" font-size="21" font-weight="700" letter-spacing="0.5" class="ink">Keep It Simple</text>
+  <text x="74" y="49" font-size="13" font-weight="400" letter-spacing="3.5" class="brand" style="text-transform:uppercase">Stupid</text>
+</svg>

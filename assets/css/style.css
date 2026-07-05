@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Keep It Simple Stupid — a quiet, readable serif theme.
+   Optimized for long-form reading: comfortable measure, generous rhythm.
+   ========================================================================== */
+
+:root {
+  /* A high-quality serif stack. Falls back gracefully across every OS. */
+  --serif: "Iowan Old Style", "Charter", "Palatino Linotype", "Palatino",
+           "Book Antiqua", Georgia, "Times New Roman", serif;
+  --mono: "SF Mono", "JetBrains Mono", "Menlo", "Consolas",
+          "Liberation Mono", monospace;
+
+  /* Soft e-ink grey palette — easy on the eyes, gentle contrast */
+  --bg: #e9e8e3;          /* warm light grey, like an e-ink screen */
+  --fg: #3a3832;          /* soft grey-ink, gentle on the eyes */
+  --muted: #6f6c63;
+  --rule: #d2d0c8;
+  --accent: #6a3a2a;      /* muted sepia-brown — restrained, intellectual */
+  --accent-soft: #8a5241;
+  --code-bg: #dedcd4;
+
+  --measure: 51rem;       /* roomier, comfortable measure */
+  --leading: 1.72;
+}
+
+/* --- Reset-ish --- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--serif);
+  /* Fluid type: smoothly scales between small and large viewports */
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
+  line-height: var(--leading);
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  hanging-punctuation: first last;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-block: 3.5rem 5rem;
+  padding-inline: 1.4rem;
+}
+
+/* --- Skip link (visually hidden until focused) --- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 4px 0;
+  z-index: 10;
+}
+.skip-link:focus {
+  left: 0;
+  text-decoration: none;
+}
+
+/* --- Header --- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 1.6rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.site-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  color: var(--fg);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.site-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-inline-start: 1.1rem;
+}
+.site-nav a:hover { color: var(--accent); }
+
+/* --- Links --- */
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 2px; }
+
+/* --- Focus states (keyboard accessibility) --- */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  font-weight: 700;
+  margin: 2.4em 0 0.7em;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h1 { font-size: 2.1rem; }
+h2 { font-size: 1.55rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.05rem; }
+
+p { text-wrap: pretty; }
+p, ul, ol, blockquote, pre, table { margin: 0 0 1.4rem; }
+
+/* --- Home / post list --- */
+.year-group { margin-bottom: 1rem; }
+.post-list { margin: 0; }
+.post-card { margin-bottom: 2.4rem; }
+.post-card .entry-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  line-height: 1.3;
+}
+.post-card .entry-title a { color: var(--fg); }
+.post-card .entry-title a:hover { color: var(--accent); text-decoration: none; }
+.post-card .entry-meta { color: var(--muted); font-size: 0.95rem; margin: 0 0 0.4rem; }
+.post-card .entry-excerpt { color: var(--fg); margin: 0; }
+.year-heading {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin: 2.6rem 0 1.2rem;
+  font-weight: 700;
+}
+
+/* --- Post --- */
+.post-title { margin-top: 0; font-size: 2.3rem; }
+.post-meta { color: var(--muted); font-size: 0.95rem; margin-top: -0.4rem; }
+.post-meta .tag { font-style: italic; }
+
+.post-content { margin-top: 2rem; }
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.8rem auto;
+  border-radius: 2px;
+}
+.post-content blockquote {
+  margin-inline: 0;
+  padding-inline-start: 1.2rem;
+  border-inline-start: 3px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.8rem 0;
+}
+.post-content ul, .post-content ol { padding-inline-start: 1.4rem; }
+.post-content li { margin-bottom: 0.4rem; }
+
+/* --- Code --- */
+code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.12em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  background: var(--code-bg);
+  padding: 1rem 1.15rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 0.82em;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: inherit; }
+
+/* --- Tables --- */
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); text-align: left; }
+
+/* --- Post navigation --- */
+.post-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.95rem;
+}
+.post-nav .next { margin-inline-start: auto; text-align: right; }
+
+/* --- Footer --- */
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.85rem;
+}

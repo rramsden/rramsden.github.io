@@ -1,7 +1,14 @@
-<style>
-body {
-  background: black;
-  color: white;
-}
-</style>
-<p>It is pitch dark. You are likely to be eaten by a grue.</p>
+---
+layout: default
+---
+{% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+{% for year in posts_by_year %}
+  <section class="year-group">
+    <h2 class="year-heading">{{ year.name }}</h2>
+    <div class="post-list">
+      {% for post in year.items %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    </div>
+  </section>
+{% endfor %}

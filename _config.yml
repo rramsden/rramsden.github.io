@@ -1,0 +1,34 @@
+title: Keep It Simple Stupid
+author: Richard Ramsden
+email: ""
+description: >-
+  Essays and notes on software, building things, and the occasional
+  detour. Written to be read.
+baseurl: ""
+url: "https://rramsden.ca"
+lang: en-US
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /posts/:title/
+timezone: Asia/Tokyo
+
+kramdown:
+  syntax_highlighter: rouge
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+feed:
+  path: /index.xml
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
