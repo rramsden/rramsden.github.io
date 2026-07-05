@@ -185,14 +185,14 @@ code {
   font-size: 0.9em;
   background: #3c3836;
   padding: 0.12em 0.35em;
-  border-radius: 3px;
+  border-radius: 5px;
   color: #fabd2f;
   border: 1px solid #504945;
 }
 pre {
   background: #282828;
   padding: 1rem 1.15rem;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow-x: auto;
   font-size: 0.88em;
   line-height: 1.5;
@@ -202,11 +202,21 @@ pre {
 pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
 
 /* --- Syntax Highlighting (Gruvbox Dark theme) --- */
-.highlight table td { padding: 5px; }
+.highlight table td { padding: 5px; border: none; }
 .highlight table pre { margin: 0; }
+.highlight table { border-collapse: separate; }
+/* Remove any borders from all highlighting elements */
+.highlight, .highlight *, .highlight pre, .highlight code, .highlight span {
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
 .highlight, .highlight .w {
   color: #fbf1c7;
   background-color: #282828;
+  border-radius: 8px;
 }
 .highlight .err {
   color: #fb4934;
@@ -318,6 +328,12 @@ pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
 /* --- Tables --- */
 table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
 th, td { padding: 0.5rem 0.7rem; border-bottom: 1px solid var(--rule); text-align: left; }
+/* Override table styling for syntax highlighting tables */
+.highlight table, .highlight table th, .highlight table td {
+  border: none !important;
+  border-collapse: separate !important;
+  padding: 0 !important;
+}
 
 /* --- Post navigation --- */
 .post-nav {

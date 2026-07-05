@@ -15,7 +15,7 @@ Today we will build a simple weather assistant which will be a simple agentic lo
 
 There are a few dependencies we will need to follow along
 
-### Typescript Project Scaffold
+### 1. Typescript Project Scaffold
 
 You will need to create a base project. In this case I am creating a very simple project scaffold using three package including openai which will use below
 
