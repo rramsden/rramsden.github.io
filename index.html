@@ -7,7 +7,9 @@ layout: default
     <h2 class="year-heading">{{ year.name }}</h2>
     <div class="post-list">
       {% for post in year.items %}
-        {% include post-card.html post=post %}
+        {% unless post.unlisted %}
+          {% include post-card.html post=post %}
+        {% endunless %}
       {% endfor %}
     </div>
   </section>
