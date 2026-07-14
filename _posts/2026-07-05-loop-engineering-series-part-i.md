@@ -251,7 +251,7 @@ if (reply.tool_calls && reply.tool_calls.length > 0) {
   for (const toolCall of reply.tool_calls) {
     if (toolCall.function.name == "get_weather") {
       const args = JSON.parse(toolCall.function.arguments)
-      const toolResult = get_weather(args.location);
+      const toolResult = await get_weather(args.location);
       
       messages.push({
         role: "tool",
